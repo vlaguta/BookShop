@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!-- Assume ИМЯ ВАШЕЙ БД is the database name -->
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:54320/shop</property>
+        <property name="hibernate.connection.username">user</property>
+        <property name="hibernate.connection.password">pass</property>
+
+        <!-- List of XML mapping files -->
+        <mapping class="com.bookShop.model.Book"/>
+        <mapping class="com.bookShop.model.Cart"/>
+        <mapping class="com.bookShop.model.Customer"/>
+        <mapping class="com.bookShop.model.RecallRequest"/>
+        <mapping class="com.bookShop.model.Order"/>
+
+    </session-factory>
+</hibernate-configuration>
