@@ -1,9 +1,10 @@
 package com.bookShop;
 
 import com.bookShop.service.BookService;
-import static com.bookShop.util.Utils.createBook;
 
 import java.util.Scanner;
+
+import static com.bookShop.util.Utils.createBook;
 
 public class BookShop {
 

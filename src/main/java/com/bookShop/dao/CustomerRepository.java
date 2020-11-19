@@ -8,8 +8,6 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.Scanner;
 
-import static com.bookShop.util.Utils.createUser;
-
 public class CustomerRepository implements CrudRepository<Customer> {
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -21,7 +19,7 @@ public class CustomerRepository implements CrudRepository<Customer> {
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        session.save(createUser());
+        session.save(customer);
         transaction.commit();
         session.close();
     }
@@ -47,5 +45,13 @@ public class CustomerRepository implements CrudRepository<Customer> {
         transaction.commit();
         session.close();
 
+    }
+
+    public Customer getCustomer(int customerId) {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction;
+
+        transaction = session.beginTransaction();
+        return session.get(Customer.class, customerId);
     }
 }

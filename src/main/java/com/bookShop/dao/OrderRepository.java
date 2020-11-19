@@ -1,12 +1,12 @@
 package com.bookShop.dao;
 
 import com.bookShop.model.Order;
-import com.bookShop.model.Status;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.time.ZonedDateTime;
 import java.util.Scanner;
 
 public class OrderRepository {
@@ -14,32 +14,37 @@ public class OrderRepository {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-    public void add() {
+    public void add(int customerId) {
 
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Order order = new Order();
+        Order order = new Order(customerId);
+        order.setDateTime(ZonedDateTime.now());
+        order.setStatus(0);
         session.save(order);
         transaction.commit();
         session.close();
     }
 
-    public void update(Order order) {
+    public void update(int orderId) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
+        Order order = session.get(Order.class, orderId);
+        order.setStatus(1);
         session.update(order);
         transaction.commit();
         session.close();
-    }
+    } //как правильно? как в cart передавать объект или как в order передавать orderId
 
-    public void remove(Order order) {
+    public void remove(int orderId) {
 
         Session session = this.sessionFactory.openSession();
         Transaction transaction;
 
         transaction = session.beginTransaction();
+        Order order = session.get(Order.class, orderId);
         session.delete(order);
         transaction.commit();
         session.close();

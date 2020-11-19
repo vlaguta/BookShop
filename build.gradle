@@ -21,4 +21,10 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.22.Final'
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.9.2'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+
 }

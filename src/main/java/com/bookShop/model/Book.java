@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -27,14 +26,16 @@ public class Book {
     private String publishingHouse;
     private String language;
     private int count;
-    @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false) //cart_id
-    private Cart cart;
+    @ManyToMany(mappedBy = "books")
+    //@JoinTable(name = "book_cart",
+    //        joinColumns = @JoinColumn(name = "book_id"),
+    //        inverseJoinColumns = @JoinColumn(name = "cart_id"))
+    private List<Cart> carts;
     @ManyToMany
     @JoinTable(name = "order_book",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private List<Order> orders;
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
+    private List<Order> order;
 
     public Book() {
     }
@@ -128,5 +129,21 @@ public class Book {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", price=" + price +
+                ", publishingHouse='" + publishingHouse + '\'' +
+                ", language='" + language + '\'' +
+                ", count=" + count +
+                ", carts=" + carts +
+                ", order=" + order +
+                '}';
     }
 }

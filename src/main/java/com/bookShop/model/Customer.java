@@ -17,13 +17,12 @@ import java.util.List;
 
 public class Customer {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne (optional=true, cascade= CascadeType.ALL)
-    @JoinColumn(name="id")
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private Cart cart;
     private String name;
     @Column(name = "last_name")
@@ -32,7 +31,7 @@ public class Customer {
     private String phone;
     private String email;
     @OneToMany(mappedBy = "customer")
-    private List<Order> orders;
+    private List<Order> order;
     //@OneToOne(mappedBy)
     //private RecallRequest recallRequest;
 
